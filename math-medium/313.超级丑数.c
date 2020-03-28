@@ -6,7 +6,7 @@
  * https://leetcode-cn.com/problems/super-ugly-number/description/
  *
  * algorithms
- * Medium (62.21%)
+ * Medium (62.18%)
  * Likes:    70
  * Dislikes: 0
  * Total Accepted:    6.3K
@@ -34,7 +34,9 @@
  * 
  * 
  */
+#include<limits.h>
 // @lc code=start
+
 
 int nthSuperUglyNumber(int n, int *primes, int primesSize)
 {
@@ -61,4 +63,6 @@ int nthSuperUglyNumber(int n, int *primes, int primesSize)
     return dp[n-1];
 }
 
+
 // @lc code=end
+

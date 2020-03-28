@@ -6,7 +6,7 @@
  * https://leetcode-cn.com/problems/ugly-number/description/
  *
  * algorithms
- * Easy (48.96%)
+ * Easy (48.95%)
  * Likes:    110
  * Dislikes: 0
  * Total Accepted:    27.9K
@@ -44,7 +44,7 @@
  * 
  * 
  */
-
+#include <stdbool.h>
 // @lc code=start
 
 
@@ -62,6 +62,7 @@ bool isUgly(int num)
         num /= 5;
     return num == 1;
 }
+
 
 
 // @lc code=end

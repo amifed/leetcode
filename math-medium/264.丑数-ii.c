@@ -10,7 +10,7 @@
  * Likes:    243
  * Dislikes: 0
  * Total Accepted:    20.6K
- * Total Submissions: 40.5K
+ * Total Submissions: 40.6K
  * Testcase Example:  '10'
  *
  * 编写一个程序，找出第 n 个丑数。
@@ -54,6 +54,7 @@ int nthUglyNumber(int n)
     }
     return dp[n - 1];
 }
+
 
 // @lc code=end
 
