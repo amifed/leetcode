@@ -10,5 +10,4 @@
 #define Max2(a, b) (a > b ? a : b)
 int main()
 {
-    int primes[] = {2, 7, 13, 19};
-}   
+}
