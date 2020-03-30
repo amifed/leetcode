@@ -4,7 +4,7 @@
 #include <math.h>
 #include <limits.h>
 #include <stdlib.h>
-#define MAX_SIZE 200
+#include "math-easy/168.excel表列名称.c"
 #define Min2(a, b) (a < b ? a : b)
 #define Min3(a, b, c) (a > b ? (b > c ? c : b) : (a > c ? c : a));
 #define Max2(a, b) (a > b ? a : b)
