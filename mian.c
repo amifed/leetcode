@@ -10,11 +10,5 @@
 #define Max2(a, b) (a > b ? a : b)
 int main()
 {
-    char ch;
-    printf("请输入一个字符:");
-    ch = getchar();
-    if (ch >= '0' && ch <= '9')
-        printf("1\n");
-    else
-        printf("0\n");
+
 }
