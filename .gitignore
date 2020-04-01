@@ -1,5 +1,5 @@
 .vscode/*
 *.code-workspace
 .idea/*
-/main.c
-/main
+main.c
+main
