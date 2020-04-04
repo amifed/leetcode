@@ -1,0 +1,52 @@
+/*
+ * @lc app=leetcode.cn id=42 lang=c
+ *
+ * [42] 接雨水
+ *
+ * https://leetcode-cn.com/problems/trapping-rain-water/description/
+ *
+ * algorithms
+ * Hard (49.52%)
+ * Likes:    1039
+ * Dislikes: 0
+ * Total Accepted:    74.8K
+ * Total Submissions: 149.7K
+ * Testcase Example:  '[0,1,0,2,1,0,1,3,2,1,2,1]'
+ *
+ * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+ * 
+ * 
+ * 
+ * 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢
+ * Marcos 贡献此图。
+ * 
+ * 示例:
+ * 
+ * 输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+ * 输出: 6
+ * 
+ */
+
+// @lc code=start
+
+int Max(int a, int b) { return a > b ? a : b; }
+
+// 左右两边最大值中的最小值决定当前水量
+int trap(int* height, int heightSize) {
+  if (heightSize < 3) return 0;
+  int l = 0, r = heightSize - 1, left_max = 0, right_max = 0, rain = 0;
+  while (l < r) {
+    if (height[l] < height[r]) {
+      left_max = Max(left_max, height[l]);
+      rain += (left_max - height[l]);
+      ++l;
+    } else {
+      right_max = Max(right_max, height[r]);
+      rain += (right_max - height[r]);
+      --r;
+    }
+  }
+  return rain;
+}
+// @lc code=end
+// [1,4,4,7,8,3,2,6,8,0,2,2,3,0,0,4,7,8,2,4]
