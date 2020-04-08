@@ -32,12 +32,19 @@
 
 // @lc code=start
 
-
-int maxProfit(int* prices, int pricesSize){
-
-  return 0;
+#define Max(a, b) (a > b ? a : b)
+int maxProfit(int* prices, int pricesSize) {
+  if (pricesSize < 2) return 0;
+  int i, dp[pricesSize][3];
+  dp[0][0] = 0;  //不持股
+  dp[0][1] = -prices[0];
+  dp[0][2] = 0;
+  for (i = 1; i < pricesSize; i++) {
+    dp[i][0] = Max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+    dp[i][1] = Max(dp[i - 1][1], dp[i - 1][2] - prices[i]);
+    dp[i][2] = dp[i - 1][0];
+  }
+  return dp[i - 1][0];
 }
 
-
 // @lc code=end
-
