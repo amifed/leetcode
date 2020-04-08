@@ -38,29 +38,26 @@
  * 
  * 
  */
-
+#include <stdlib.h>
+#include <string.h>
 // @lc code=start
 
-
-int numDecodings(char *s)
-{
-    if (s == NULL || strlen(s) < 1 || *s == '0')
+int numDecodings(char *s) {
+  if (s == NULL || strlen(s) < 1 || *s == '0')
+    return 0;
+  int i, pre, cur, temp;
+  for (pre = cur = 1, i = 1; s[i] != '\0'; i++) {
+    temp = cur;
+    if (s[i] == '0')
+      if (s[i - 1] == '1' || s[i - 1] == '2')
+        cur = pre;
+      else
         return 0;
-    int i, pre, cur, temp;
-    for (pre = cur = 1, i = 1; s[i] != '\0'; i++)
-    {
-        temp = cur;
-        if (s[i] == '0')
-            if (s[i - 1] == '1' || s[i - 1] == '2')
-                cur = pre;
-            else
-                return 0;
-        else if (s[i - 1] == '1' || (s[i - 1] == '2' && s[i] > '0' && s[i] < '7'))
-            cur += pre;
-        pre = temp;
-    }
-    return cur;
+    else if (s[i - 1] == '1' || (s[i - 1] == '2' && s[i] > '0' && s[i] < '7'))
+      cur += pre;
+    pre = temp;
+  }
+  return cur;
 }
 
 // @lc code=end
-
