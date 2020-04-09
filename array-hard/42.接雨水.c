@@ -50,7 +50,7 @@ int trap(int* height, int heightSize) {
   if (heightSize < 3) return 0;
   int i, rain = 0;
   int left_max[heightSize], right_max[heightSize];
-  // 从左往右找最小
+  // 从左往右找最大
   left_max[0] = height[0];
   for (i = 1; i < heightSize; i++) {
     left_max[i] = Max(left_max[i - 1], height[i]);
