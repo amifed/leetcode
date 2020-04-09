@@ -30,7 +30,7 @@
 
 #include <string.h>
 // @lc code=start
-#define MAX_SIZE 2048
+#define MAX_SIZE 1430
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
@@ -58,4 +58,14 @@ char** generateParenthesis(int n, int* returnSize) {
   return result;
 }
 
+// int catalan(n) {
+//   int i, j, h[n + 1];
+//   h[0] = h[1] = 1;
+//   for (i = 2; i <= n; i++) {
+//     h[i] = 0;
+//     for (j = 0; j < i; j++)
+//       h[i] = h[i] + h[j] * h[i - j - 1];
+//   }
+//   return h[n];
+// }
 // @lc code=end
