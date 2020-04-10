@@ -37,7 +37,8 @@
  * 
  * 
  */
-
+#include<stdlib.h>
+#include<TreeNode.h>
 // @lc code=start
 /**
  * Definition for a binary tree node.
