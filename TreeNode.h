@@ -3,7 +3,6 @@ struct TreeNode {
   struct TreeNode *left;
   struct TreeNode *right;
 };
-
 int numStrToNum(char *str) {
   int num = 0, negative = 0;
   if (*str == '-') {
@@ -30,4 +29,27 @@ struct TreeNode *createBiTree() {
     T = NULL;
   }
   return T;
+}
+void perOrder(struct TreeNode *T) {
+  if (T != NULL) {
+    printf("%d -> ", T->val);
+    perOrder(T->left);
+    perOrder(T->right);
+  }
+}
+
+void inOrder(struct TreeNode *T) {
+  if (T != NULL) {
+    inOrder(T->left);
+    printf("%d -> ", T->val);
+    inOrder(T->right);
+  }
+}
+
+void postOrder(struct TreeNode *T) {
+  if (T != NULL) {
+    postOrder(T->left);
+    postOrder(T->right);
+    printf("%d ", T->val);
+  }
 }
