@@ -57,12 +57,11 @@
  */
 #include <stdlib.h>
 // @lc code=start
-#define MAX_SIZE 1024
+#define MAX_SIZE 512
 
 struct User {
   int id;                  //用户id
   int followee[MAX_SIZE];  //用户关注的用户id  (基于数组的散列)
-  struct User* next;
 };
 
 struct Tweet {
@@ -79,8 +78,7 @@ typedef struct {
 /** Initialize your data structure here. */
 Twitter* twitterCreate() {
   Twitter* twitter = (Twitter*)malloc(sizeof(Twitter));
-  twitter->user = (struct User*)malloc(sizeof(struct User));
-  twitter->user->next = NULL;
+  twitter->user = (struct User*)calloc(MAX_SIZE, sizeof(struct User));
   twitter->tweet = (struct Tweet*)malloc(sizeof(struct Tweet));
   twitter->tweet->next = NULL;
   return twitter;
@@ -100,66 +98,37 @@ int* twitterGetNewsFeed(Twitter* obj, int userId, int* retSize) {
   int* ret = (int*)calloc(10, sizeof(int));
   *retSize = 0;
   struct Tweet* tweet = obj->tweet->next;
-  struct User* user = obj->user->next;
-  while (user && user->id != userId) user = user->next;  //查找用户结点
-  if (user == NULL) {                                    //未找到，当前用户未关注任何用户
-    while (tweet && *retSize < 10) {
-      if (tweet->userId == userId)  //用户自己发的推文
+  struct User* user = obj->user;
+  if ((user + userId))
+    while (tweet && *retSize < 10) {  //用户自己及用户关注的人的推文
+      if (tweet->userId == userId || (user + userId)->followee[tweet->userId] == 1)
         ret[(*retSize)++] = tweet->tweetId;
       tweet = tweet->next;
     }
-    return ret;
-  }
-  while (tweet && *retSize < 10) {
-    if (tweet->userId == userId || user->followee[tweet->userId] == 1)  //用户自己及用户关注的人的推文
-      ret[(*retSize)++] = tweet->tweetId;
-    tweet = tweet->next;
-  }
+  else
+    while (tweet && *retSize < 10) {  //用户自己发的推文
+      if (tweet->userId == userId)
+        ret[(*retSize)++] = tweet->tweetId;
+      tweet = tweet->next;
+    }
   return ret;
 }
 
 /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
 void twitterFollow(Twitter* obj, int followerId, int followeeId) {
-  struct User* u = obj->user;
-  while (u->next && u->id != followerId) u = u->next;  //用户链表中是否存在当前用户
-  if (u->id == followerId)                             //存在：将关注的用户id散列到数组中，关注(1)
-    u->followee[followeeId] = 1;
-  else {  //不存在：新建用户结点，关注(1)，头插法插入用户链表
-    struct User* user = (struct User*)malloc(sizeof(struct User));
-    user->id = followerId;
-    user->followee[followeeId] = 1;
-    user->next = obj->user->next;
-    obj->user->next = user;
-  }
+  struct User* user = obj->user;
+  (user + followerId)->followee[followeeId] = 1;
 }
 
 /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
 void twitterUnfollow(Twitter* obj, int followerId, int followeeId) {
-  struct User* u = obj->user;
-  while (u->next && u->id != followerId) u = u->next;  //用户链表中是否存在当前用户
-  if (u->id == followerId)                             //存在：取消关注(0)
-    u->followee[followeeId] = 0;
+  struct User* user = obj->user;
+  (user + followerId)->followee[followeeId] = 0;
 }
 
 void twitterFree(Twitter* obj) {
-  if (obj && obj->user) {
-    struct User* u;
-    while (obj->user->next) {
-      u = obj->user;
-      obj->user = obj->user->next;
-      free(u);
-    }
-    free(obj->user);
-  }
-  if (obj && obj->tweet) {
-    struct Tweet* t;
-    while (obj->tweet->next) {
-      t = obj->tweet;
-      obj->tweet = obj->tweet->next;
-      free(t);
-    }
-    free(obj->tweet);
-  }
+  if (obj && obj->user) free(obj->user);
+  if (obj && obj->tweet) free(obj->tweet);
   if (obj) free(obj);
 }
 
