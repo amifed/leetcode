@@ -116,14 +116,12 @@ int* twitterGetNewsFeed(Twitter* obj, int userId, int* retSize) {
 
 /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
 void twitterFollow(Twitter* obj, int followerId, int followeeId) {
-  struct User* user = obj->user;
-  (user + followerId)->followee[followeeId] = 1;
+  (obj->user + followerId)->followee[followeeId] = 1;
 }
 
 /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
 void twitterUnfollow(Twitter* obj, int followerId, int followeeId) {
-  struct User* user = obj->user;
-  (user + followerId)->followee[followeeId] = 0;
+  (obj->user + followerId)->followee[followeeId] = 0;
 }
 
 void twitterFree(Twitter* obj) {
