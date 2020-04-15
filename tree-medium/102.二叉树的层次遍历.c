@@ -64,7 +64,7 @@ int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes
     }
     // last 用来指向每层的最后一个结点
     int front = 0, rear = 0, last = 0, columnSizes = 0;
-    struct TreeNode **queue = (struct TreeNode **)malloc(sizeof(struct TreeNode) * 1000);
+    struct TreeNode **queue = (struct TreeNode **)malloc(sizeof(struct TreeNode*) * 1000);
     int **result = (int **)malloc(sizeof(int *) * 1000);
     *returnColumnSizes = (int *)malloc(sizeof(int) * 1000);
     struct TreeNode *p = NULL;
