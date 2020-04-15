@@ -99,3 +99,25 @@ int** updateMatrix(int** matrix, int matrixSize, int* matrixColSize, int* return
 // @lc code=end
 // [[1,1,1],[1,1,1],[1,1,0]]
 // [[0],[0],[0],[0],[0]]
+// #define SIZE 3
+// int main() {
+//   int i, j, matrixSize = SIZE;
+//   int** matrix = (int**)malloc(sizeof(int*) * SIZE);
+//   int* matrixColSize = (int*)malloc(sizeof(int) * SIZE);
+//   for (i = 0; i < SIZE; i++) {
+//     matrix[i] = (int*)malloc(sizeof(int) * SIZE);
+//     matrixColSize[i] = SIZE;
+//     // 测试数据： 1 1 1 1 1 1 1 1 0
+//     for (j = 0; j < matrixColSize[i]; j++)
+//       scanf("%d", &matrix[i][j]);
+//   }
+//   int returnSize, *returnColumnSizes;
+//   int** result = updateMatrix(matrix, matrixSize, matrixColSize, &returnSize, &returnColumnSizes);
+//   // 打印结果
+//   for (i = 0; i < returnSize; i++) {
+//     for (j = 0; j < returnColumnSizes[i]; j++)
+//       printf("%d ", result[i][j]);
+//     printf("\n");
+//   }
+//   return 0;
+// }
