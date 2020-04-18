@@ -46,7 +46,7 @@ typedef struct TrieNode {
 
 /** Initialize your data structure here. */
 Trie* trieCreate() {
-  Trie* trie = (Trie*)calloc(1, sizeof(Trie));
+  Trie* trie = (Trie*)calloc(1, sizeof(Trie)); //必须使用calloc
   return trie;
 }
 
