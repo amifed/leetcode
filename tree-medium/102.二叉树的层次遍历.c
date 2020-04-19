@@ -37,8 +37,8 @@
  * 
  * 
  */
-#include<stdlib.h>
-#include<TreeNode.h>
+#include <TreeNode.h>
+#include <stdlib.h>
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -48,54 +48,33 @@
  *     struct TreeNode *right;
  * };
  */
-
-
+#define MAX_SIZE 1024
 /**
  * Return an array of arrays of size *returnSize.
  * The sizes of the arrays are returned as *returnColumnSizes array.
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
-int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes)
-{
-    if (!root)
-    {
-        *returnSize = 0;
-        return 0;
+int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes) {
+  // last 用来指向每层的最后一个结点
+  *returnSize = 0;
+  int front = 0, rear = 0, last = 0;
+  struct TreeNode **queue = (struct TreeNode **)malloc(sizeof(struct TreeNode *) * MAX_SIZE), *p;
+  *returnColumnSizes = (int *)calloc(MAX_SIZE, sizeof(int));
+  int **result = (int **)malloc(sizeof(int *) * MAX_SIZE);
+  if (root == NULL) return result;
+  queue[front++] = root;
+  result[(*returnSize)] = (int *)calloc(front - rear, sizeof(int));
+  while (front != rear) {
+    p = queue[rear++];
+    result[*returnSize][(*returnColumnSizes)[*returnSize]++] = p->val;
+    if (p->left != NULL) queue[front++] = p->left;
+    if (p->right != NULL) queue[front++] = p->right;
+    if (rear - 1 == last) {
+      result[++(*returnSize)] = (int *)calloc(front - rear, sizeof(int));
+      last = front - 1;
     }
-    // last 用来指向每层的最后一个结点
-    int front = 0, rear = 0, last = 0, columnSizes = 0;
-    struct TreeNode **queue = (struct TreeNode **)malloc(sizeof(struct TreeNode*) * 1000);
-    int **result = (int **)malloc(sizeof(int *) * 1000);
-    *returnColumnSizes = (int *)malloc(sizeof(int) * 1000);
-    struct TreeNode *p = NULL;
-    *returnSize = 0;
-    queue[front++] = root;
-    result[(*returnSize)] = (int *)malloc(sizeof(int) * (front - rear));
-    while (front != rear)
-    {
-        p = queue[rear++];
-        result[(*returnSize)][columnSizes] = p->val;
-        columnSizes++;
-        if (p->left != NULL)
-        {
-            queue[front++] = p->left;
-        }
-        if (p->right != NULL)
-        {
-            queue[front++] = p->right;
-        }
-        if (rear - 1 == last)
-        {
-            (*returnColumnSizes)[(*returnSize)] = columnSizes;
-            (*returnSize)++;
-            result[(*returnSize)] = (int *)malloc(sizeof(int) * (columnSizes * 2));
-            last = front - 1;
-            columnSizes = 0;
-        }
-    }
-    return result;
+  }
+  return result;
 }
 
-
 // @lc code=end
-
