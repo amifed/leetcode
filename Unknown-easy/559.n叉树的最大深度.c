@@ -34,8 +34,9 @@
  * 树的节点总不会超过 5000。
  * 
  */
-
 #include <Node.h>
+#include <limits.h>
+#include <stdlib.h>
 // @lc code=start
 /**
  * Definition for a Node.
@@ -45,9 +46,13 @@
  *     struct Node** children;
  * };
  */
-
+int Max(int a, int b) { return a > b ? a : b; }
 int* maxDepth(struct Node* root) {
-
-  
+  if (root == NULL) return 0;
+  int max = 0;
+  for (int i = 0; i < root->numChildren; i++) {
+    max = Max(max, maxDepth(root->children[i]));
+  }
+  return max + 1;
 }
 // @lc code=end
