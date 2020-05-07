@@ -13,7 +13,7 @@ class Solution {
     // reverse(nums.begin(), nums.end() - k);
     // reverse(nums.end() - k, nums.end());
     // reverse(nums.begin(), nums.end());
-    std::rotate(nums.begin(), nums.ends() - k % nums.size(), nums.end());
+    std::rotate(nums.begin(), nums.end() - k % nums.size(), nums.end());
   }
 };
 // @lc code=end
