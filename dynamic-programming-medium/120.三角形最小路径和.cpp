@@ -28,15 +28,25 @@ public:
   //   }
   //   return min_path;
   // }
-  // from down to top
+  // from down to top [][]
+  // int minimumTotal(vector<vector<int>> &triangle) {
+  //   int min_path = INT_MAX;
+  //   vector<vector<int>> dp(triangle.begin(), triangle.end());
+  //   for (int i = triangle.size() - 2; i > -1; i--) {
+  //     for (int j = triangle[i].size() - 1; j > -1; j--)
+  //       dp[i][j] = min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+  //   }
+  //   return dp[0][0];
+  // }
+  // from down to top []
   int minimumTotal(vector<vector<int>> &triangle) {
     int min_path = INT_MAX;
-    vector<vector<int>> dp(triangle.begin(), triangle.end());
+    vector<int> dp(triangle.back());
     for (int i = triangle.size() - 2; i > -1; i--) {
-      for (int j = triangle[i].size() - 1; j > -1; j--)
-        dp[i][j] = min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+      for (int j = 0; j < triangle[i].size(); j++)
+        dp[j] = min(dp[j], dp[j + 1]) + triangle[i][j];
     }
-    return dp[0][0];
+    return dp[0];
   }
 };
 // @lc code=end
