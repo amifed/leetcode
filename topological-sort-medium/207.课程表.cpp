@@ -8,29 +8,26 @@ using namespace std;
 // @lc code=start
 class Solution {
  public:
-  void dfs(int u, bool& invalid, vector<int>& visited,
-           vector<vector<int>> edges) {
-    visited[u] = 1;
-    for (auto&& v : edges[u]) {
-      if (visited[v] == 0) {
-        dfs(v, invalid, visited, edges);
-        if (invalid) return;
-      } else if (visited[v] == 1) {
-        invalid = true;
-        return;
+  bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+    vector<vector<int>> edges(numCourses, vector<int>());
+    vector<int> indegree(numCourses, 0);
+    int ret = 0;
+    for (auto&& i : prerequisites) {
+      edges[i[0]].push_back(i[1]);
+      ++indegree[i[1]];
+    }
+    queue<int> Q;
+    for (int i = 0; i < numCourses; i++)
+      if (indegree[i] == 0) Q.push(i);
+    while (!Q.empty()) {
+      int u = Q.front();
+      Q.pop(), ret++;
+      for (auto&& v : edges[u]) {
+        --indegree[v];
+        if (indegree[v] == 0) Q.push(v);
       }
     }
-    visited[u] = 2;
-  }
-  bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-    if(prerequisites.size() == 0) return true;
-    bool invalid = false;
-    vector<int> visited(numCourses, 0);
-    vector<vector<int>> edges(numCourses, vector<int>());
-    for (auto&& i : prerequisites) edges[i[1]].push_back(i[0]);
-    for (int i = 0; i < numCourses; i++)
-      if (!visited[i]) dfs(i, invalid, visited, edges);
-    return !invalid;
+    return ret == numCourses;
   }
 };
 // @lc code=end
