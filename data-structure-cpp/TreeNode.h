@@ -29,37 +29,42 @@ TreeNode *createBiTree() {
   } else
     return NULL;
 }
-void perOrder(TreeNode *T) {
+void pre_order(TreeNode *T) {
   if (T != NULL) {
     cout << T->val << " -> ";
-    perOrder(T->left);
-    perOrder(T->right);
+    pre_order(T->left);
+    pre_order(T->right);
   }
 }
-//perorder serialize
+// preorder serialize
 string serialize(TreeNode *root) {
-  if (root == NULL) return "#";
-  return to_string(root->val) + "," + serialize(root->left) + "," + serialize(root->right);
+  if (root == NULL)
+    return "#";
+  return to_string(root->val) + "," + serialize(root->left) + "," +
+         serialize(root->right);
 }
 vector<string> split(string s, char ch) {
   vector<string> ret;
   int index = 0, pos = 0;
-  if (s.find_first_of(ch) != string::npos || s.length() > 0) s.push_back(',');
+  if (s.find_first_of(ch) != string::npos || s.length() > 0)
+    s.push_back(',');
   while (true) {
     pos = s.find(ch, index);
-    if (pos == string::npos) break;
+    if (pos == string::npos)
+      break;
     ret.push_back(s.substr(index, pos - index));
     index = pos + 1;
   }
   return ret;
 }
 TreeNode *generate(vector<string> &data) {
-  if (data.size() == 0) return NULL;
+  if (data.size() == 0)
+    return NULL;
   if (data[0] == "#") {
     data.erase(data.begin());
     return NULL;
   }
-  TreeNode* root = new TreeNode(stoi(data[0]));
+  TreeNode *root = new TreeNode(stoi(data[0]));
   data.erase(data.begin());
   root->left = generate(data);
   root->right = generate(data);
@@ -75,7 +80,7 @@ int main() {
   string tree = serialize(T);
   cout << tree << endl;
   TreeNode *t = deserialize(tree);
-  perOrder(t);
+  pre_order(t);
   cout << endl;
   return 0;
 }
