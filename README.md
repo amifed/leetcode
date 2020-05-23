@@ -6,5 +6,5 @@ leetcode algorithm code;
 
 #### Language
 
-- C
+- C/C++
 - JavaScript
