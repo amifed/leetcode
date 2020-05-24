@@ -4,7 +4,10 @@ struct TreeNode {
   int val;
   TreeNode *left;
   TreeNode *right;
-  TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right)
+      : val(x), left(left), right(right) {}
 };
 int numStrToNum(char *str) {
   int num = 0, negative = 0;
@@ -36,10 +39,11 @@ void perOrder(TreeNode *T) {
     perOrder(T->right);
   }
 }
-//perorder serialize
+// perorder serialize
 string serialize(TreeNode *root) {
   if (root == NULL) return "#";
-  return to_string(root->val) + "," + serialize(root->left) + "," + serialize(root->right);
+  return to_string(root->val) + "," + serialize(root->left) + "," +
+         serialize(root->right);
 }
 vector<string> split(string s, char ch) {
   vector<string> ret;
@@ -59,7 +63,7 @@ TreeNode *generate(vector<string> &data) {
     data.erase(data.begin());
     return NULL;
   }
-  TreeNode* root = new TreeNode(stoi(data[0]));
+  TreeNode *root = new TreeNode(stoi(data[0]));
   data.erase(data.begin());
   root->left = generate(data);
   root->right = generate(data);
