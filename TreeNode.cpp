@@ -76,13 +76,13 @@ TreeNode *deserialize(string data) {
   vector<string> nodes = split(data, ',');
   return generate(nodes);
 }
-int main() {
-  // -1 2 # # 33 4 # # 5 # #
-  TreeNode *T = createBiTree();
-  string tree = serialize(T);
-  cout << tree << endl;
-  TreeNode *t = deserialize(tree);
-  pre_order(t);
-  cout << endl;
-  return 0;
-}
+// int main() {
+//   // -1 2 # # 33 4 # # 5 # #
+//   TreeNode *T = createBiTree();
+//   string tree = serialize(T);
+//   cout << tree << endl;
+//   TreeNode *t = deserialize(tree);
+//   pre_order(t);
+//   cout << endl;
+//   return 0;
+// }
