@@ -16,7 +16,7 @@ class Solution:
     #     for i in reversed(range(n - 1)):
     #         right.insert(0, right[0] * nums[i + 1])
     #     return [left[i] * right[i] for i in range(n)]
-
+    # 前缀积 O(1)
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n, ret = len(nums), list([1])
         for i in range(1, n):
