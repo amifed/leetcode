@@ -54,19 +54,20 @@
  *     struct TreeNode *right;
  * };
  */
+
 int Max(int a, int b) { return a > b ? a : b; }
-int maxPath(struct TreeNode* root, int* max) {
-  int left, right, pathMax;
-  if (root == NULL) return 0;
-  left = Max(maxPath(root->left, max), 0);
-  right = Max(maxPath(root->right, max), 0);
-  *max = Max(*max, root->val + left + right);
-  return root->val + Max(left, right);  //两点之间
+int maxPath(struct TreeNode *root, int *max) {
+    if (root == NULL)
+        return 0;
+    int left = Max(maxPath(root->left, max), 0);
+    int right = Max(maxPath(root->right, max), 0);
+    *max = Max(*max, root->val + left + right);
+    return root->val + Max(left, right); //两点之间
 }
-int maxPathSum(struct TreeNode* root) {
-  int max = INT_MIN;
-  maxPath(root, &max);
-  return max;
+int maxPathSum(struct TreeNode *root) {
+    int max = INT_MIN;
+    maxPath(root, &max);
+    return max;
 }
 
 // @lc code=end
