@@ -8,6 +8,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # dp
     def findLength(self, A: List[int], B: List[int]) -> int:
         m, n = len(A), len(B)
         dp = [[0] * (m+1) for _ in range(n+1)]

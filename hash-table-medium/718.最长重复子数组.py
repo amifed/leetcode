@@ -8,6 +8,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Rabin-Karp algorithm
     def findLength(self, A: List[int], B: List[int]) -> int:
         base, mod = 113, 10**9 + 9
 

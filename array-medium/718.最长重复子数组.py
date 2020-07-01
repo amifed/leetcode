@@ -8,6 +8,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # sliding window
     def findLength(self, A: List[int], B: List[int]) -> int:
         def max_length(addA: int, addB: int, length: int) -> int:
             ret = k = 0
