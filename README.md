@@ -7,4 +7,5 @@ leetcode algorithm code;
 #### Language
 
 - C/C++
+- python3
 - JavaScript
