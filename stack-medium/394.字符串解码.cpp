@@ -8,6 +8,12 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    string vectorToString(vector<string> v) {
+        string ret = "";
+        for (const auto &s : v)
+            ret.append(s);
+        return ret;
+    }
     string decodeString(string s) {
         vector<string> st;
         int ptr = 0;
@@ -18,16 +24,16 @@ public:
                     num.push_back(s[ptr++]);
                 st.push_back(num);
             } else if (s[ptr] == ']') {
-                string sub;
+                vector<string> strs;
                 while (st.back() != "[") {
-                    sub.append(st.back());
+                    strs.push_back(st.back());
                     st.pop_back();
                 }
                 st.pop_back(); //左括号
-                reverse(sub.begin(), sub.end());
+                reverse(strs.begin(), strs.end());
                 int repeat = stoi(st.back());
                 st.pop_back();
-                string ret;
+                string ret, sub = vectorToString(strs);
                 while (repeat--)
                     ret.append(sub);
                 st.push_back(ret);
@@ -36,15 +42,14 @@ public:
                 st.push_back(string(1, s[ptr++]));
             }
         }
-        string ret;
-        for (const auto &sub : st)
-            ret.append(sub);
-        return ret;
+        return vectorToString(st);
     }
 };
 // @lc code=end
 int main() {
-    string s = "3[a2[bc]]";
-    cout << Solution().decodeString(s);
+    string str;
+    getline(cin, str);
+    string result = Solution().decodeString(str);
+    cout << result << endl;
     return 0;
 }
