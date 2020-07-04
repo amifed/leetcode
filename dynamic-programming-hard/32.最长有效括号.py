@@ -20,19 +20,40 @@ class Solution:
     #             ret = max(ret, dp[i])
     #     return ret
 
+    # def longestValidParentheses(self, s: str) -> int:
+    #     """stack"""
+    #     ret = 0
+    #     stack = [-1]
+    #     for i in range(len(s)):
+    #         if s[i] == '(':
+    #             stack.append(i)
+    #         else:
+    #             stack.pop()
+    #             if stack:
+    #                 ret = max(ret, i - stack[-1])
+    #             else:
+    #                 stack.append(i)
+    #     return ret
+
     def longestValidParentheses(self, s: str) -> int:
-        """stack"""
-        ret = 0
-        stack = [-1]
+        """count"""
+        left = right = ret = 0
         for i in range(len(s)):
-            if s[i] == '(':
-                stack.append(i)
-            else:
-                stack.pop()
-                if stack:
-                    ret = max(ret, i - stack[-1])
-                else:
-                    stack.append(i)
+            left += (s[i] == '(')
+            right += (s[i] == ')')
+            if left == right:
+                ret = max(ret, 2*left)
+            elif right > left:
+                left = right = 0
+
+        left = right = 0
+        for i in range(len(s)-1, -1, -1):
+            left += (s[i] == '(')
+            right += (s[i] == ')')
+            if left == right:
+                ret = max(ret, 2*right)
+            elif left > right:
+                left = right = 0
         return ret
 
 # @lc code=end
