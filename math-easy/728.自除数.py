@@ -3,7 +3,7 @@
 #
 # [728] 自除数
 #
-from typing import List`
+from typing import List
 
 
 # @lc code=start
