@@ -3,37 +3,35 @@
  *
  * [329] 矩阵中的最长递增路径
  */
-#include <algorithm>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 // @lc code=start
 class Solution {
- public:
-  const int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-  vector<vector<int>> memo;
-  int dfs(vector<vector<int>>& matrix, int x, int y, int row, int col) {
-    if (memo[x][y] != 0) return memo[x][y];
-    for (int i = 0; i < 4; i++) {
-      int _x = x + dir[i][0], _y = y + dir[i][1];
-      if (-1 < x && x < row && -1 < y && y < col &&
-          matrix[_x][_y] > matrix[x][y])
-        memo[x][y] = max(memo[x][y], dfs(matrix, _x, _y, row, col));
+public:
+    int row, col;
+    const int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    vector<vector<int>> memo;
+    int dfs(vector<vector<int>> &matrix, int r, int c) {
+        if (memo[r][c] != 0) return memo[r][c];
+        for (auto v : dir) {
+            int x = r + v[0], y = c + v[1];
+            if (-1 < x && x < row && -1 < y && y < col && matrix[r][c] < matrix[x][y]) {
+                memo[r][c] = max(memo[r][c], dfs(matrix, x, y));
+            }
+        }
+        return ++memo[r][c];
     }
-    return ++memo[x][y];
-  }
-  int longestIncreasingPath(vector<vector<int>>& matrix) {
-    if (matrix.empty() || matrix[0].empty()) return 0;
-    int row = matrix.size();
-    int col = matrix[0].size();
-    memo = vector<vector<int>>(row, vector<int>(col, 0));
-    int ret = 0;
-    for (int i = 0; i < row; ++i) {
-      for (int j = 0; j < col; ++j) {
-        ret = max(ret, dfs(matrix, i, j, row, col));
-      }
+    int longestIncreasingPath(vector<vector<int>> &matrix) {
+        if (matrix.size() == 0 || matrix[0].size() == 0) return 0;
+        row = matrix.size(), col = matrix[0].size();
+        memo.resize(row, vector<int>(col, 0));
+        int ret = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                ret = max(ret, dfs(matrix, i, j));
+            }
+        }
+        return ret;
     }
-    return ret;
-  }
 };
 // @lc code=end
