@@ -3,12 +3,7 @@
  *
  * [98] 验证二叉搜索树
  */
-#include <algorithm>
-#include <climits>
-#include <iostream>
-#include <vector>
-
-#include "./TreeNode.cpp"
+#include <bits/stdc++.h>
 using namespace std;
 // @lc code=start
 /**
@@ -21,17 +16,14 @@ using namespace std;
  * };
  */
 class Solution {
- public:
-  long predt = LONG_MIN;
-  bool isValidBST(TreeNode* root) {
-    if (root == NULL)
-      return true;
-    else {
-      bool left = isValidBST(root->left);
-      if (!left || predt >= root->val) return false;
-      predt = root->val;
-      return isValidBST(root->right);
+public:
+    long long pre = LLONG_MIN;
+    bool isValidBST(TreeNode *root) {
+        if (!root) return true;
+        bool left = isValidBST(root->left);
+        if (!left || pre >= root->val) return false;
+        pre = root->val;
+        return isValidBST(root->right);
     }
-  }
 };
 // @lc code=end
