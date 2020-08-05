@@ -8,4 +8,3 @@ leetcode algorithm code;
 
 - C/C++
 - python3
-- JavaScript
