@@ -28,24 +28,17 @@ public:
         int size = words.size(), len = words[0].length();
         int n = size * len;
         unordered_map<string, int> mp;
-        int asc = 0;
         for (auto x : words) {
             mp[x]++;
-            for (auto c : x) {
-                asc += c;
-            }
         }
         int start = 0, end = 0;
-        int ascii = 0;
         while (end < s.length()) {
             if (end - start + 1 < n) {
-                ascii += s[end];
                 end++;
             } else {
-                if (ascii + s[end] == asc && check(s, len, start, end, mp)) {
+                if (check(s, len, start, end, mp)) {
                     ret.push_back(start);
                 }
-                ascii -= s[start];
                 start++;
             }
         }
