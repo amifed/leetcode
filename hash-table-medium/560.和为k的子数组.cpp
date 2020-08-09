@@ -8,16 +8,20 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
-    int subarraySum(vector<int> &nums, int k) {
+    int maxNonOverlapping(vector<int> &nums, int target) {
         unordered_map<int, int> mp;
-        mp[0] = 1;
-        int ret = 0, prefixSum = 0;
-        for (auto &x : nums) {
-            prefixSum += x;
-            if (mp.find(prefixSum - k) != mp.end()) {
-                ret += mp[prefixSum - k];
+        mp[0] = -1;
+        int sum = 0, end = -1;
+        int ret = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+            if (mp.find(sum - target) != mp.end()) {
+                if (mp[sum - target] + 1 > end) {
+                    ret++;
+                    end = i;
+                }
             }
-            mp[prefixSum]++;
+            mp[sum] = i;
         }
         return ret;
     }
