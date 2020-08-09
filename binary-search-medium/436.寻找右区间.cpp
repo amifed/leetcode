@@ -63,7 +63,7 @@ public:
         for (int i = 0; i < intervals.size(); i++) {
             ret.push_back(binary_search(pairs, intervals[i][1]));
         }
-        long a = LLONG_MIN
+        long a = LLONG_MIN;
         return ret;
     }
 };
