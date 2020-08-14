@@ -7,27 +7,32 @@
 using namespace std;
 // @lc code=start
 class Solution {
- public:
-  bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-    vector<vector<int>> edges(numCourses, vector<int>());
-    vector<int> indegree(numCourses, 0);
-    int ret = 0;
-    for (auto&& i : prerequisites) {
-      edges[i[0]].push_back(i[1]);
-      ++indegree[i[1]];
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses, vector<int>());
+        vector<int> indegree(numCourses, 0);
+        for (auto v : prerequisites) {
+            graph[v[1]].push_back(v[0]);
+            indegree[v[0]]++;
+        }
+        queue<int> q;
+        for (int i = 0; i < indegree.size(); i++) {
+            if (indegree[i] == 0)
+                q.push(i);
+        }
+        int ret = 0;
+        while (!q.empty()) {
+            auto node = q.front();
+            q.pop();
+            ret++;
+            for (auto x : graph[node]) {
+                indegree[x]--;
+                if (indegree[x] == 0) {
+                    q.push(x);
+                }
+            }
+        }
+        return ret == numCourses;
     }
-    queue<int> Q;
-    for (int i = 0; i < numCourses; i++)
-      if (indegree[i] == 0) Q.push(i);
-    while (!Q.empty()) {
-      int u = Q.front();
-      Q.pop(), ret++;
-      for (auto&& v : edges[u]) {
-        --indegree[v];
-        if (indegree[v] == 0) Q.push(v);
-      }
-    }
-    return ret == numCourses;
-  }
 };
 // @lc code=end
