@@ -52,8 +52,3 @@ public:
     }
 };
 // @lc code=end
-int main(int argc, char const *argv[]) {
-    vector<vector<char>> v = {{'X', 'X', 'X', 'X'}, {'X', 'O', 'O', 'X'}, {'X', 'X', 'O', 'X'}, {'X', 'O', 'X', 'X'}};
-    Solution().solve(v);
-    return 0;
-}
