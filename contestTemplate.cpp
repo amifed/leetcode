@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define it insert
+#define pob pop_back
+#define pub push_back
 #define all(v) (v).begin(), (v).end()
 using LL = long long;
 using PII = pair<int, int>;
@@ -13,11 +16,5 @@ public:
 };
 
 int main() {
-    Solution solution;
-    int a, b, c;
-    cin >> a >> b >> c;
-    string s;
-    cin >> s;
-    cout << (a + b + c) << ' ' << s << endl;
     return 0;
 }
