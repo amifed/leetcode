@@ -1,8 +1,6 @@
 .vscode/*
 *.code-workspace
 .idea/*
-main
-main.*
 /*/*
 !*.md
 !*.c
@@ -11,3 +9,5 @@ main.*
 !/*.c
 !/*.cpp
 !/*.py
+main
+main.*
