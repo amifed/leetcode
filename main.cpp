@@ -1,15 +1,15 @@
 #include <bits/stdc++.h>
 #include <stdio.h>
 using namespace std;
-#define LOCAL
-int main(int argc, char const *argv[]) {
-#ifdef LOCAL
-    freopen("data.in", "r", stdin);
-    freopen("data.out", "w", stdout);
-#endif
-    int a, b;
-    while (~scanf("%d %d", &a, &b)) {
-        printf("%d %d\n", a, b);
+int main() {
+    int m, n;
+    cin >> m >> n;
+    vector<int> f(n, 1);
+    for (int i = 1; i < m; i++) {
+        for (int j = 1; j < n; j++) {
+            f[j] = f[j] + f[j - 1];
+        }
     }
+    cout << f[n - 1] << endl;
     return 0;
 }
