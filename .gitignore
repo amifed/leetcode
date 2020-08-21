@@ -11,3 +11,5 @@
 !/*.py
 main
 main.*
+data.in
+data.out
