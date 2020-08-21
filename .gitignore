@@ -3,3 +3,11 @@
 .idea/*
 main
 main.*
+/*/*
+!*.md
+!*.c
+!*.cpp
+!*.py
+!/*.c
+!/*.cpp
+!/*/*.py
