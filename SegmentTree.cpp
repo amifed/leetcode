@@ -23,7 +23,7 @@ const int MAXN = 1e5 + 7;
  *  https://oi-wiki.org/ds/seg/#_5
  */
 LL n, a[MAXN], d[4 * MAXN], b[4 * MAXN];
-void build(LL s, LL t, LL p) {
+void build(LL s = 1, LL t = n, LL p = 1) {
     if (s == t) {
         d[p] = a[s];
         return;
@@ -44,7 +44,7 @@ LL getsum(LL l, LL r, LL s = 1, LL t = n, LL p = 1) {
     if (r > m) sum += getsum(l, r, m + 1, t, (p << 1) | 1);
     return sum;
 }
-void update(LL l, LL r, LL c, LL s, LL t, LL p) {
+void update(LL l, LL r, LL c, LL s = 1, LL t = n, LL p = 1) {
     if (l <= s && t <= r) {
         d[p] += (t - s + 1) * c, b[p] += c;
         return;
@@ -62,14 +62,14 @@ int main() {
     LL q, op, x, y, k;
     scanf("%lld %lld", &n, &q);
     forr(i, 1, n + 1) scanf("%lld", &a[i]);
-    build(1, n, 1);
+    build();
     while (q--) {
         scanf("%lld %lld %lld", &op, &x, &y);
         if (op == 1) {
             scanf("%lld", &k);
-            update(x, y, k, 1, n, 1);
+            update(x, y, k);
         } else {
-            printf("%lld\n", getsum(x, y, 1, n, 1));
+            printf("%lld\n", getsum(x, y));
         }
     }
     return 0;
