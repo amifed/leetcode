@@ -20,6 +20,7 @@ const int MAXN = 1e5 + 7;
 
 /**
  * 线段树， 区间修改 and 懒惰标记
+ *  https://oi-wiki.org/ds/seg/#_5
  */
 LL n, a[MAXN], d[4 * MAXN], b[4 * MAXN];
 void build(LL s, LL t, LL p) {
