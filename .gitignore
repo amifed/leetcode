@@ -13,3 +13,4 @@ main
 main.*
 data.in
 data.out
+.DS_Store
